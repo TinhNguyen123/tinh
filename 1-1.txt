@@ -1,0 +1,141 @@
+﻿Lý thuyết : 
+1: Kỹ thuật ghép/ tách kênh bước sóng WDM.
+A.Định nghĩa, cửa sổ bước sống.
+
+Hiện nay, vấn đề ghép kênh bước sóng quang dày đặc trên tín hiện quang là tương đối khó khăn do một số linh kiện quang và công nghệ chưa được hoàn thiện. Vì vậy, người ta có thể gọi ghép kênh bước sóng ở trong cùng một cửa sổ khoảng cách các tương đối nhỏ là ghép kênh bước sóng dày đặc (DWDM). DWDM là kỹ thuật truyền dẫn bằng sợi quang, kỹ thuật này sử dụng bước sóng ánh sáng để chuyển dữ liệu theo từng bít song song hoặc theo từng chuỗi ký tự. DWDM là một xu thế trong thông tin quang học. Nó lợi dụng đặc tính băng rộng của sợi quang, trong cửa sổ bước sóng 1550nm có tổn hao thấp để ghép kênh nhiều đường tín hiệu quang, nâng dung lượng thông tin sợi quang lên rất cao.
+
+B.Phân biệt tôp vật lý và topo logic trong mạng quang WDM
+
+Như đã nói ở trên, tôpô vật lý của mạng ghép kênh bước sóng là do điểm nút và các đường dây kết nối giữa các điểm nút của mạng, tôpô vật lý có liên quan trực tiếp với việc định tuyến khi đặt đường cáp quang, tuy nhiên tôpô vật lý không thể theo kịp sự cải tiến dịch vụ. Sử dụng sự liên quan mật thiết giữa khái niệm kênh quang tạo thành tôpô logic với sự phân bố dịch vụ giữa các điểm nút, có thể thay đổi tôpô logic từ cấu hình phần mềm [2]. Khác nhau cơ bản giữa tôpô vật lý và tôpô logic là
+Cơ sở của tôpô vật lý là sự kết nối vật lý giữa các điểm nút; Cơ sở thiết kế của tôpô logic là quan hệ kết nối logic giữa các điểm nút, mà cơ sở thực hiện là quan hệ kết nối vật lý giữa điểm nút.
+•Trong mạng quang, tôpô vật lý phản ánh quan hệ kết nối trong lớp môi trường vật lý, mức độ phức tạp của tôpô vật lý có quan hệ mật thiết với số lượng đầu dây của điểm nút mạng; Tôpô logic phản ánh kết nối lớp kênh quang của mạng, truyền dẫn và chức năng xử lý, độ phức tạp của tôpô có quan hệ trực tiếp với số lượng đầu dây của điểm nút, số lượng bước sóng ghép kênh, chức năng và kết cấu của mạng.
+Thiết kế tôpô vật lý có mục đích là nhằm đáp ứng nhu cầu dịch vụ mạng, quá trình thiết kế được thực hiện sao cho phân bố địa lý của điểm nút mạng và quan hệ kết nối vật lý giữa các điểm nút là tối ưu; Mục đích thiết kế tôpô logic là dựa vào tôpô vật lý đã có để nâng cao chỉ tiêu vận hành và kinh doanh mạng, tối ưu hóa chức năng mạng của lớp kênh quang.
+
+C.Khái niệm lớp quang, chức năng của bộ OXC và OADM. 
+Khái niệm lớp quang
+Lớp quang là lớp chủ (server) cung cấp các dịch vụ đến các khách (client). Lớp quang nằm giữa lớp vật lý và lớp liên kết dữ liệu
+chức năng của bộ OXC và OADM
+
+OXC có hai chức năng chính là chức năng nối chéo của kênh quang và chức năng ghép tách đường tại chỗ. Chức năng này có thể làm cho kênh quang nào đó tách ra để đưa vào mạng địa phương hoặc sau khi trực tiếp đưa vào DXC của lớp SDH thông qua biến đổi quang, do kênh điện trong DXC sẽ xử lý. Đồng thời cho phép kênh quang ở địa phương nhập vào và ghép kênh truyền đến đầu ra của đường kết nối
+
+Bộ ghép tách quang (OADM) là một linh kiện quan trọng của việc tổ chức mạng truyền dẫn, chức năng của nó là tách (Drop) lọc tín hiệu quang từ những thiết bị truyền dẫn đưa về mạng tại chỗ, đồng thời ở đường nhập (Add), tín hiệu quang của thuê bao phát cho một điểm nút khác mà không ảnh hưởng đến việc truyền dẫn các tín hiệu kênh bước sóng khác
+
+D.Mạng định tuyến bước sóng.
+
+Do sự mở rộng khoảng cách và có một số lượng lớn các điểm nút với thông lượng lớn của mạng quảng bá và lựa chọn, việc tách sóng tín hiệu làm tổn thất năng lượng quang và thiếu khả năng dùng lại bước sóng [8]. Mạng định tuyến bước sóng giải quyết vấn đề này bằng cách chuyển năng lượng truyền theo một tuyến đường cụ thể giữa điểm nút nguồn và điểm nút đích (nghĩa là tránh quảng bá tín hiệu đến các điểm nút không liên quan), và dùng lại các bước sóng tại các bộ phận không trùng nhau.
+Mạng định tuyến bước sóng bao gồm một hoặc nhiều thành phần tuyển chọn bước sóng và các sợi quang kết nối chúng (Hình 1.5). Những thành phần tuyển chọn bước sóng đó được làm từ thủy tinh (nghĩa là không có sự chuyển đổi quang điện) và được gọi là bộ định tuyến bước sóng. Các bộ định tuyến bước sóng có khả năng định tuyến các tín hiệu trên các sợi quang vào đến các sợi quang ra một cách riêng lẻ. Cổng ra của mỗi tín hiệu trong bộ định tuyến bước sóng được xác định bởi cổng (sợi quang) vào và bước sóng của chúng.
+
+E.Mô hình IP-over – WDM
+
+
+F.Hãy giải thích tại sao cần thiết đề xuất các mô hình ip-over- WDM( câu hỏi liên quan).
+
+WDM tức là truyền dẫn trực tiếp gói số liệu IP trên kênh quang, hiện nay đây là công nghệ
+mới nhất. Dùng công nghệ IP qua WDM có thể giảm sự trùng lặp chức năng giữa các lớp mạng, giảm bộ phận trung gian thừa giữa các lớp SDH/SONET, ATM, và lớp IP, giảm thao tác thiết bị, giảm phí bảo dưỡng và quản lý. Đồng thời do tiết kiệm được lớp ATM trung gian và thiết bị SDH/SONET cho nên gói số liệu trực tiếp vận hành trên sợi quang có hiệu suất truyền dẫn cao nhất, chi phí ngoài thấp nhất, đồng thời đơn giản hoá việc quản lý mạng, có thể phối hợp với đặc tính lưu lượng không đối xứng của IP, tận dụng băng tần, giảm giá thành khai thác. Từ đó giảm một cách gián tiếp chi phí cho thuê bao để có được dịch vụ thông tin đa phương tiện. Ngoài ra, trong IP qua WDM, mỗi kênh tín hiệu không còn là kênh tín hiệu SDH ghép kênh thời gian, mà là kênh tín hiệu độc chiếm ghép kênh bước sóng, tốc độ trên 1 Gbit/s, nâng cao thêm một bước tốc độ truyền dẫn của mạng. Loại mạng IP băng rộng này có thể có đầu dây FR và ATM, lúc này vận hành FR và ATM trên mạng IP, tức FR qua IP hay ATM qua IP. 
+
+G.Bài toàn RWA: định nghĩa các loại bài toàn rwa, hàm mục tiêu, các ràng buộc.
+định nghĩa các loại bài toàn rwa 
+Topo vật lý của một mạng định tuyến bước sóng gồm các điểm nút, bộ định tuyến bước sóng và sợi quang kết nối chúng lại với nhau. Kênh quang được thiết lập giữa các nút đầu cuối đi qua topo vật lý này và tạo nên một topo logic. Mỗi kênh quang được phân phối cho một đường đi qua mạng và một bước sóng trên đường đi đó. Việc tìm ra đường đi qua mạng cho các kênh quang và phân phối bước sóng cho các kênh quang đó gọi là định tuyến và phân phối bước sóng (RWA).
+
+Bài toán RWA có thể được chia thành 2 loại: RWA tĩnh (SLE) và RWA động (DLE). Nói chung RWA động là yêu cầu xem xét xây dựng kết nối quang đến là ngẫu nhiên, tức là khi có một yêu cầu kết nối; với RWA tĩnh là trước khi xét đến việc định tuyến và phân phối bước sóng thì đã biết sự kết nối quang muốn xây dựng [3].
+
+hàm mục tiêu
+RWA tĩnh (SLE)
+Hàm mục tiêu: Phân phối bước sóng cho các kênh quang sao cho số bước sóng được sử dụng là nhỏ nhất
+SLE với ràng buộc tính liên tục (thống nhất) của bước sóng, có thể được đưa về dạng bài toán chương trình tuyến tính nguyên ( ) 
+hàm mục tiêu là cực tiểu hóa các luồng trên mỗi kết nối, tương ứng, cực tiểu hóa số kênh quang qua một liên kết cụ thể
+RWA động (DLE).
+Hàm mục tiêu: Khi xây dựng kết nối (thiết lập kênh quang và phân phối các bước sóng), chọn phương án có tổn hao nhỏ nhất (khả năng huỷ bỏ yêu cầu nhỏ nhất), cũng có nghĩa là trong điều kiện tài nguyên mạng có hạn (số bước sóng xác định trước), có thể hỗ trợ xây dựng kết nối kênh quang đến mức tối đa (tức là số kết nối được thiết lập là lớn nhất), hoặc có thể giảm tối đa chi phí thiết lập mạng.
+các ràng buộc.
+
+
+H.Hãy mô tả 2 ràng buộc cơ bản khi đinh tuyến mạng wdm? Ràng buộc nào có thể gỡ bỏ (giảm nhé) và bằng cách nào?
+SLE với ràng buộc tính liên tục (thống nhất) của bước sóng
+Xác suất tắc nghẻn
+
+
+
+
+2. Mạng chuyển mạch chùm qung.
+A .phân biệt với mạng OCS, OPS
+ Giống nhau:Là sự thiết lập nối kết theo yêu cầu từ một ngõ vào yêu cầu đến một ngõ ra yêu cầu trong một tập ngõ vào và ngõ ra (ITU-T)
+Mục đích: Thiết lập đường truyền dẫn từ nguồn thông tin đến đích theo một cấu trúc cố định hoặc biến động qua các mạng và trung tâm + 
+a.Chuyển mạch kênh: 
++ -Nguyên tắc: Là loại chuyển mạch phục vụ sự trao đổi thông tin bằng cách cấp kênh dẫn trực tiếp cho hai đối tượng sử dụng + -Xử lý cuộc gọi tiếnhành qua 3 giai đoạn:Thiết lập kênh dẫn,Duy trì kênh dẫn,Giải phóng kênh dẫn
++ Đặc điểm: + Thực hiện sự trao đổi thông tin giữa hai đối tượng theo thời gian thực. + Đối tượng sử dụng làm chủ kênh dẫn trong suốt quá trình trao đổi tin 
++ Hiệu suất thấp
+Lãng phí thời gian do có giai đoạn thiết lập kênh và giải phóng kênh + Nội dung thông tin không mang thông tin địa chỉ + Phù hợp với dịch vụ thoại + Khi lưu lượng tăng đến một mức ngưỡng nào đó thì một số cuộc gọi có thể bị khoá, mạng từ chối mọi yêu cầu kết nối cho đến khi có thể +b.Chuyển mạch gói:
+-Nguyên tắc: + Dữ liệu được chia thành nhiều gói nhỏ có chiều dài thay đổi, mỗi gói được gán thêm địa chỉ cùng với những thông tin điều khiển cần thiết.-Các gói đi vào trong một node được lưu vào trogn bộ đệm cho đến khi được xử lý, sau đó xếp hàng trong hàng đợi chờ cho đến khi được truyền trên tuyến tiếp theo -Tại trung tâm nhận tin, các gói được hợp thành một bản tin và được sắp xếp lại để đưa tới thiết bị nhận số liệu
+Đặc điểm
+ + Các đường truyền dẫn có thể phối hợp sử dụng một số lớn các nguồn tương đối hoạt động. Do đó hiệu suất sử dụng kênh tăng
+ + Độ trễ trung bình của các tuyến truyền dẫn phụ thuộc vào tải trong mạng
+Hạn chế được tình trạng trễ và thông lượng của mạng suy giảm khi lượng thông tin đến quá lớn ở các node. Độ tin cậy cao 
++ Để chống lỗi, mạng chuyển mạch gói sử dụng phương thức tự động hỏi lại 
++ Tại trung tâm nhận tin, xử lý các tín hiệu kiểm tra lỗi để xác định xem gói đó có lỗi
+	1.Nguyên tác hoạt động cơ bản nào trong mạng OBS cho phép khác phục được hạn chế về bộ đêm quang đối với mạng ÓPS?.
+Trong mạng chuyển mạch chùm quang, các burst dữ liệu, bao gồm nhiều gói tin IP, được truyền toàn quang qua mạng.
+nMột gói tin điều khiển BCP (burst control packet) được truyền đi trước một khoảng thời gian offset để cấu hình các nút dọc theo đường đi từ nguồn đến đích.
+➢➢Khoảng thời gian offset này đủ cho phép gói tin điều khiển có thể xử lý và thiết lập các chuyển mạch trước khi burst dữ liệu đến. Vì vậy mạng chuyển mạch chùm quang không cần đến các
+bộ đệm điện tử hay bộ đệm quang
+	2.Trong một mạng OBS, các nút đợc phân thành hai 2, các nút biên và các lõi. Nhưng gì là cần thiết đối với các nút lỗi để đảm bào rằng một mạng OBS có thể thực hiện mà không càn bất kỳ sự chậm trễ thêm nào?
+Những nút lõi chịu trách nhiệm chuyển mạch các burst từ cổng vào tới cổng ra dựa trên những gói tin điều khiển và xử lý các tranh chấp 
+
+Burst đã tập hợp được truyền trong môi trường toàn quang qua những bộ định tuyến lõi (OBS router) mà không cần bất kỳ lưu trữ nào tại các nút trung gian.
+. Bời vi các nút biên là quan trọng trong mạng OBS, những chức năng cần phải được thực hiện trong các nút biên là gì? 
+Nút biên chịu trách nhiệm kết hợp những gói tin thành burst, và lập lịch cho burst để truyền tải trên các kênh bước sóng ở cổng ra.
+Nút biên vào có thể kết hợp những gói tin đến từ nhiều nguồn khác nhau trong một burst.
+Nút biên ra nhận burst, tách burst thành những gói tin ban đầu và chuyển chúng tới đích.
+
+B. tập hợp chùm.
+	i. Bài toán tập hợp chùm thực hiện tại nút nào trong mạng OBS.
+Tập hợp chùm (burst) là tập hợp các gói điện tử và đóng gói thành chùm tại nút biên vào của mạng OBS
+
+	ii. Trong các giải thuật tập hợp burst, tại sao việc chọn ngưỡng (thời gian hay kích thước) là quan trọng?
+Ngưỡng kích thước quan trọng
+Một giá trị ngưỡng được sử dụng như một tham số giới hạn để quyết định khi nào tạo ra một chùm và gởi chùm vào trong mạng 
+ Lúc nào người ta cần thay đổ các ngưỡng này?\
+
+  Dạng giải thuật nào thường được sử dụng trong trường hợp này. 
+c. Bào hiệu.
+	i.Khi thực hiện báo hiệu trên mạng chuyền mạch burst OBS gười ta có thể đặt trước tài nguyền ngày lập túc hay sau một khoảng trễ. Hãy giải thích sự khác nhau, ưu và khuyết điểm của mỗi loại.
+
+Trong kỹ thuật đặt trước tứ thời, kênh (tài nguyên) sẽ được dành
+riêng ngay lập tứ khi gói điều khiển đến các nút (giao thứ JIT (JustIn-Time)).
+
+Kỹ thuật đặt trước sau khoảng thời gian trễ, các kênh được đặt chô
+dựa trên thời gian thực tế của chùm dữ liệu đến tại nút đó (gói điều
+khiển phải được gửi đi trước chùm dữ liệu một khoảng thời gian
+offset), ví dụ: giao thứ JET (Just-Enough-Time).
+
+	ii.Phân biệt sự khác nhau về chức năng của bài toàn định tuyến và gán bước sóng RWA. Với bài toàn báo hiệu trong mạng chuyển mạch chùm quang OBS. Mối liên hệ của 2 bài toàn này.
+
+
+d. Lập lịch, lập lịch lại
+	i.Anh chị hay chỉ ra những nét khác nhau giữa 2 giải thuật lập lịch có và không lấp đầy khoảng trống? tương ứng với mỗi loại tham số nào sẽ được chú ý đến.
+	ii.Ý tưởng chính của các giải thuật lập lịch lại là gì ? láy ví dụ minh họa giải thuật ODBR, ADR
+	iii.Thế nào là lâp lích lại trong mạng OBS? Điều kiến để có thể lập lích lại trong mô hình phân tích với giới hạn bộ chuyển đổi bước sóng( số bộ chuyển đổi bước sóng < số bước sóng).
+
+e. Giải quyết tranh chấp. 
+	i. Hãy cho biết tại sao có sự tranh chấp tai j1 nút trên mạng chuyển mạch chùm quang? Hãy trinh bày tóm tắt các hướng tiếp cận giải quyết tranh chấp.
+
+	ii. Ưu điểm của giải pháp định tuyến lệch hướng so với các giải pháp khác trong vấn đề giải quyết tranh chấp trên mạng chuyển mạch chum quang? Tham số nào cần phải tính toán lại khi truyền lệch hướng? giải thích tại sao và chỉ ra phương án giải quyết.
+Ưu điểm 
+Trong định tuyến lệch hướng, sự tranh chấp được giải quyết bởi định tuyến chùm dữ liệu vào đến một cổng ra khác hơn so với cổng ra đã dự định.
+Định tuyến lệch hướng thường không được ưu tiên trong các mạng chuyển mạch gói điện tử vì khả năng lặp lại và truyền gói không theo thư tự. Tuy nhiên, phương pháp này là cần thiết trong mạng chuyển mạch chùm, do khả năng bộ đệm quang rất giới hạn.
+Tham số nào cần phải tính toán lại khi truyền lệch hướng:
+là điều chỉnh khoảng thời gian offset sao cho phù hợp đường lệch hướng
+giải thích tại sao và chỉ ra phương án giải quyết.
+Khi chùm bị chuyển hướng, nó phải đi qua nhiều nút trung gian lớn hơn là đường không bị  chuyển hướng. Thời gian offset ban đầu do dó có thể không đủ cho gói tin điều khiển thực hiện xử lý chuyển mạch và cấu hình lại tại các nút trung gian trước khi chùm dữ liệu đến
+Giải pháp
+Cách tiếp cận đơn giản là loại bỏ chùm nếu thời gian offset không đủ Sử dụng bộ đếm và bộ đo thời gian để phát hiện và giới hạn số các nút trung gian mà một chùm phải đi qua.Sử dụng các đường trễ FDL cũng có thể được áp dụng; tuy nhiên các cách tiếp cận như vậy làm tăng độ phứ tạp của lớp quang.
+
+ii.Phân đoạn chùm.
+Giải pháp:
+Một chùm được chia thành các phân đoạn, mỗ phân đoạn bao gồm header (phần đầu của phân đoạn) và payload (tải trọng)
+Chỉ những đoạn bị chồng chéo của chùm bị đánh rơi thay vì đánh rơi cả chùm
+Xác xuất mất gói tin sẽ được giảm đáng kể.
+Có thể kết hợp với việc sử dụng các đường trễ FDL.
+
+
+
+
